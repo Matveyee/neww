@@ -4,7 +4,7 @@ import fs from 'fs'
 const server = http.createServer( (req, res) => {
     
     if (req.url === '/') {
-        fs.readFile("./HTML/index.html", (err, data) => {
+        fs.readFile("index.html", (err, data) => {
 
             if (err) {
                 throw err; 
