@@ -4,7 +4,7 @@ import fs from 'fs'
 const server = http.createServer( (req, res) => {
     
     if (req.url === '/') {
-        fs.readFile("index.html", (err, data) => {
+        fs.readFile("HTML/index.html", (err, data) => {
 
             if (err) {
                 throw err; 
@@ -18,7 +18,7 @@ const server = http.createServer( (req, res) => {
     }
 
     if(req.url === '/obraz') {
-        fs.readFile("obraz.html", (err, data) => {
+        fs.readFile("HTML/obraz.html", (err, data) => {
 
             if (err) {
                 throw err; 
@@ -32,7 +32,7 @@ const server = http.createServer( (req, res) => {
     }
 
     if(req.url === '/prototypes') {
-        fs.readFile("proto.html", (err, data) => {
+        fs.readFile("HTML/proto.html", (err, data) => {
 
             if (err) {
                 throw err; 
@@ -45,7 +45,7 @@ const server = http.createServer( (req, res) => {
         })
     }
     if(req.url === '/kino') {
-        fs.readFile("kino.html", (err, data) => {
+        fs.readFile("HTML/kino.html", (err, data) => {
 
             if (err) {
                 throw err; 
