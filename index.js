@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 
 const server = http.createServer( (req, res) => {
     
-    if (req.url === '/:') {
+    if (req.url === '/') {
         fs.readFile(path.join(__dirname, 'HTML', 'index.html'), (err, data) => {
 
             if (err) {
