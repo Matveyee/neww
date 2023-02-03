@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 const server = http.createServer( (req, res) => {
     
     if (req.url === '/:') {
-        fs.readFile(path.join(__dirname, 'index.html'), (err, data) => {
+        fs.readFile(path.join(__dirname, 'HTML', 'index.html'), (err, data) => {
 
             if (err) {
                 throw err; 
@@ -66,9 +66,6 @@ const server = http.createServer( (req, res) => {
 
     
 } )
-
-
-
 
 
 server.listen( 3000, () => { console.log('Server is working...') });
