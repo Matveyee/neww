@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Раскольников</title>
+  <style >
+    #header{
+        width: 100%;
+        height: 150px;
+        background-color: rgb(40, 158, 4);
+    }
+    #sdnv {
+      height: 100%;
+      width: 160px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: rgb(30, 121, 2);
+      overflow-x: hidden;
+      padding-top: 20px;
+      margin-left: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    #links a{
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        background-color: rgb(21, 87, 1);
+        transition: 0.5s linear;
+    
+    }
+    #links a:hover {
+    color: #000000;
+    background: rgb(76, 255, 21);
+    }
+    #sdnv2 {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: rgb(30, 121, 2);
+    margin-right: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    overflow-y: hidden;   
+    }
+    .textblock {
+        margin-left: 168px;
+        margin-top: 50px;
+        margin-right: 168px;
+    }
+    #img {
+      margin-top:200px;
+    }
+    #img2 {
+      margin-top:150px;
+      width: 160px;
+      height: 160px;
+    }
+    P.fig {
+      text-align: left;
+    }
+    P.cit {
+      margin-left: 50px;
+      font-style: italic;
+    }
+    #form {
+        font-size: 4ch;
+    }
+
+  </style>
+</script>
+ </head>
+ <body>
+    <div id="sdnv">
+        <div class="space"><h1 align="center" ><font size="5" color="white">Содержание</font></h1></div>
+        <div id="links" >
+        <a href="/">Характеристика Головлёва</a>
+        <a href="/obraz">Образ Головлёва</a>
+        <a href="/prototypes">Прототип Иудушки</a>
+        <a href="/kino">Иудушка Головлёв в кино и театре</a>
+        <a href="/raskoln">Раскольников</a>
+        <a href="/game">Игра</a>
+        </div>
+    </div>
+    <div id="sdnv2"></div>
+    <div id="header" >
+        <header >
+          <p align="center"><font size="9" face="century schoolbook" color="white">Раскольников</font></p>
+        </header>
+        </div>
+        <div  class="textblock" >
+            <h1 align="center" >Вопрос №3</h1>
+            <h2>
+                Кто такой Лужин??
+            </h2>
+            <form  id="form" >
+                <input type="radio" class='g' value="1h" name="numb1" id="ratio1" checked>
+                <label for="ratio1" >друг Раскольникова</label><br />
+                <input type="radio" class='g'value="2h" name="numb1" id="ratio2">
+                <label for="ratio2" >жених сестры Раскольникова</label><br/>
+                <input type="radio" class='g'value="3h" name="numb1" id="ratio3">
+                <label for="ratio3" >следователь в конторе</label><br/>
+                <input type="radio" class='g'value="4h" name="numb1" id="ratio4">
+                <label for="ratio4" >врач Раскольникова</label><br/>
+                <button class="btn" stype="submit" >Ответить</button>
+            </form>
+
+        </div>
+  
+ </body>

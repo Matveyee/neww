@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <title>Порфирий</title>
   <style >
-    .header{
+    #header{
         width: 100%;
         height: 150px;
-        background-color: rgb(249, 203, 118);
+        background-color: rgb(40, 158, 4);
     }
     .sidenav {
       height: 100%;
@@ -16,7 +16,7 @@
       z-index: 1;
       top: 0;
       left: 0;
-      background-color: rgb(250, 174, 34);
+      background-color: rgb(30, 121, 2);
       overflow-x: hidden;
       padding-top: 20px;
       margin-left: 8px;
@@ -44,7 +44,7 @@
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: rgb(250, 174, 34);
+    background-color: rgb(30, 121, 2);
     margin-right: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     overflow-y: hidden;   
@@ -85,11 +85,41 @@
     </div>
     <div class="sidenav2"></div>
 
-    <header>
-      <div class="header" >
-      <p align="center"><font size="9" face="century schoolbook" >Прототип</font></p>
-      </div>
-     </header> 
+    <div id="header" >
+        <header >
+          <p align="center"><font size="9" face="century schoolbook" >Раскольников</font></p>
+        </header>
+        </div>
+     <script type="text/javascript" >
+        function g(){
+        let r_mode = document.body.children[1];
+        let r_mode1 = document.body.children[0];
+        let r_mode2 = document.body.children[2];
+        r_mode.style.backgroundColor = 'rgb(30, 121, 2)';
+        r_mode1.style.backgroundColor = 'rgb(30, 121, 2)';
+        r_mode2.style.backgroundColor = 'rgb(40, 158, 4)';
+        let i = 30,k = 121,j = 2, x = 40, y = 158, z = 4;
+        function change_color(a,b,c){
+            r_mode.style.backgroundColor = `rgb(${a},${b},${c})`;
+            r_mode1.style.backgroundColor = `rgb(${a},${b},${c})`;
+        }
+        function change_color1(d,e,f) {
+            r_mode2.style.backgroundColor = `rgb(${d},${e},${f})`;
+        }       
+        let timer = setInterval(() => {
+            if (i <= 250) {i++};
+            if (k <= 174) {k++};
+            if (j <= 34)   {j++};
+            if (x <= 249) {x++};
+            if (y <= 203) {y++};
+            if (z <= 118)   {z++};
+            change_color(i,k,j);
+            change_color1(x,y,z);
+        }, 4)
+        setTimeout(() => {clearInterval(timer)}, 3000)
+        }
+        setTimeout(g,500)
+        </script> 
     <div class="textblock">
         <h1 align="center" >Прототип Иудушки Головлёва</h1>
         <p>Сам писатель говорил, что одним из прототипов Порфирия Владимировича является старший брат Дмитрий. «Ужели, наконец, не противно это лицемерие, эта вечная маска, надевши которую этот человек одною рукою богу молится, а другою делает всякие кляузы?», — писал он о Дмитрии матери. Дмитрий Евграфович тоже не любил брата, называя его изменником дворянскому делу.
