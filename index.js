@@ -229,7 +229,14 @@ const server = http.createServer( (req, res) => {
             res.writeHead(200, {"Content-type" : "text/html"});
             res.end(data)
         })
-    }else {
+    }else if (  ( (h_adrs[h_adrs.length-2] === '/raskoln') || (h_adrs[h_adrs.length-2] === '/game') ) && (h_adrs[h_adrs.length-2] === '/game') ) {
+        
+        fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
+            if (err) {throw err};
+            res.writeHead(200, {"Content-type" : "text/html"});
+            res.end(data)
+    
+        }else {
         fs.readFile(adrs_sch[h_adrs[h_adrs.length-1]], (err, data) => {
             if (err) {throw err};
             res.writeHead(200, {"Content-type" : "text/html"});
