@@ -235,8 +235,9 @@ const server = http.createServer( (req, res) => {
             if (err) {throw err};
             res.writeHead(200, {"Content-type" : "text/html"});
             res.end(data)
+        }
     
-        }else {
+     }else {
         fs.readFile(adrs_sch[h_adrs[h_adrs.length-1]], (err, data) => {
             if (err) {throw err};
             res.writeHead(200, {"Content-type" : "text/html"});
