@@ -7,7 +7,7 @@
     #header{
         width: 100%;
         height: 150px;
-        background-color: rgb(249, 203, 118);
+        /* background-color: rgb(249, 203, 118); */
     }
     #sdnv {
       height: 100%;
@@ -16,7 +16,7 @@
       z-index: 1;
       top: 0;
       left: 0;
-      background-color: rgb(250, 174, 34);
+      /* background-color: rgb(250, 174, 34); */
       overflow-x: hidden;
       padding-top: 20px;
       margin-left: 8px;
@@ -28,7 +28,7 @@
         font-size: 15px;
         color: #ffffff;
         display: block;
-        background-color: rgb(21, 87, 1);
+        /* background-color: rgb(21, 87, 1); */
         transition: 0.5s linear;
     
     }
@@ -43,7 +43,7 @@
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: rgb(250, 174, 34);
+    /* background-color: rgb(250, 174, 34); */
     margin-right: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     overflow-y: hidden;   
@@ -75,14 +75,17 @@
  <body>
     <div id="sdnv">
         <div class="space"><h1 align="center" ><font size="5" color="white">Содержание</font></h1></div>
-        <div id="links" >
-        <a href="/">Характеристика Головлёва</a>
-        <a href="/obraz">Образ Головлёва</a>
-        <a href="/prototypes">Прототип Иудушки</a>
-        <a href="/kino">Иудушка Головлёв в кино и театре</a>
-        <a href="/raskoln">Раскольников</a>
-        <a href="/game">Игра</a>
-        </div>
+        <div id="links">
+            <a href="/">Характеристика Головлёва</a>
+            <a href="/obraz">Образ Головлёва</a>
+            <a href="/prototypes">Прототип Иудушки</a>
+            <a href="/kino">Иудушка Головлёв в кино и театре</a>
+            <a href="/raskoln">Раскольников</a>
+            <a href="/game">Игра</a>
+            <a href="/caseman">Человек в футляре</a>
+            <a href="/gooseberry">Крыжовник</a>
+            <a href="/aboutlove">О любви</a>
+            </div>
     </div>
     <div id="sdnv2"></div>
     <div id="header" >
@@ -90,36 +93,7 @@
           <p align="center"><font size="9" face="century schoolbook" >Раскольников</font></p>
         </header>
         </div>
-    <script type="text/javascript" >
-        function g(){
-        let r_mode = document.body.children[1];
-        let r_mode1 = document.body.children[0];
-        let r_mode2 = document.body.children[2];
-        r_mode.style.backgroundColor = 'rgb(250, 174, 34)';
-        r_mode1.style.backgroundColor = 'rgb(250, 174, 34)';
-        r_mode2.style.backgroundColor = 'rgb(249, 203, 118)';
-        let i = 250,k = 174,j = 34, x = 249, y = 203, z = 118;
-        function change_color(a,b,c){
-            r_mode.style.backgroundColor = `rgb(${a},${b},${c})`;
-            r_mode1.style.backgroundColor = `rgb(${a},${b},${c})`;
-        }
-        function change_color1(d,e,f) {
-            r_mode2.style.backgroundColor = `rgb(${d},${e},${f})`;
-        }       
-        let timer = setInterval(() => {
-            if (i >= 30) {i--};
-            if (k >= 121) {k--};
-            if (j >= 2)   {j--};
-            if (x >= 40) {x--};
-            if (y >= 158) {y--};
-            if (z >= 4)   {z--};
-            change_color(i,k,j);
-            change_color1(x,y,z);
-        }, 4)
-        setTimeout(() => {clearInterval(timer)}, 3000)
-        }
-        setTimeout(g,500)
-        </script>
+    
         <div  class="textblock" >
             <h1 align="center" >Родион Раскольников</h1>
             <h2>Характеристика Раскольникова</h2>
@@ -213,5 +187,68 @@
                 Реальные объекты требовались писателю во многом для того, чтобы убедить самого себя в реальности создаваемых им событий. Так, его жена, Анна Григорьевна, вспоминала: «Фёдор Михайлович в первые недели нашей брачной жизни, гуляя со мною, завел меня во двор одного дома и показал камень, под который его Раскольников спрятал украденные у старухи вещи». Подобная топографическая точность была методом творчества Достоевского
             </p>
         </div>
+        <script type="text/javascript" >
+            function slowColorChange(item,color1,color2,t) {
+                let x1 = Number(color1.split(',')[0]);
+                let y1 = Number(color1.split(',')[1]);
+                let z1 = Number(color1.split(',')[2]);
+                let x2 = Number(color2.split(',')[0]);
+                let y2 = Number(color2.split(',')[1]);
+                let z2 = Number(color2.split(',')[2]);
+                let x,y,z;
+                let Vx = 4 * (x2-x1)/t;
+                let Vy = 4 * (y2-y1)/t;
+                let Vz = 4 * (z2-z1)/t;
+                let timer = setInterval(() => {
+                  let resx,resy,resz
+                  x = x1 + Vx;
+                  x1 = x;
+                  y = y1 + Vy;
+                  y1 = y;
+                  z = z1 + Vz;
+                  z1 = z;
+                  item.style.backgroundColor = `rgb(${x},${y},${z})`;
+                }, 4);
+                  setTimeout(() => {clearInterval(timer)}, t)
+              }
+              let rask_mode = document.getElementById('sdnv');
+              let rask_mode1 = document.getElementById('sdnv2');
+              let rask_mode2 = document.getElementById('header');
+              let links = document.querySelectorAll('#links a');
+      
+              function getColor() {
+                  return new Promise( (resolve,reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET','/color');
+                    xhr.onload = () => {
+                      resolve(xhr.response);
+                    }
+                    xhr.send();
+                  })
+                  
+      
+              }
+              getColor().then( obj => {
+                let data = JSON.parse(obj);
+                if (data.diff) {
+                   rask_mode.style.backgroundColor = `rgb(${data.sdnv[0]})`;
+                   rask_mode1.style.backgroundColor = `rgb(${data.sdnv[0]})`;
+                   rask_mode2.style.backgroundColor = `rgb(${data.header[0]})`;
+                   links.forEach( el => {el.style.backgroundColor = `rgb(${data.links[0]})`} )
+                   setTimeout( () => {slowColorChange(rask_mode,data.sdnv[0],data.sdnv[1],1000)}, 500);
+                   setTimeout( () => {slowColorChange(rask_mode1,data.sdnv[0],data.sdnv[1],1000)}, 500);
+                   setTimeout( () => {slowColorChange(rask_mode2,data.header[0],data.header[1],1000)}, 500 );
+                   setTimeout( () => {links.forEach(el => {slowColorChange(el,data.links[0],data.links[1],1000)})}, 500 );
+                }else {
+                   rask_mode.style.backgroundColor = `rgb(${data.sdnv})`;
+                   rask_mode1.style.backgroundColor = `rgb(${data.sdnv})`;
+                   rask_mode2.style.backgroundColor = `rgb(${data.header})`;
+                   links.forEach( el => {el.style.backgroundColor = `rgb(${data.links})`} )
+                }
+              } )
+      
+              
+              
+          </script>
   
  </body>

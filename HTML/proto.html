@@ -4,47 +4,33 @@
   <meta charset="utf-8">
   <title>Порфирий</title>
   <style >
-    .header{
+    #header{
         width: 100%;
         height: 150px;
-        background-color: rgb(249, 203, 118);
+        /* background-color: rgb(249, 203, 118); */
     }
-    .sidenav {
+    #sdnv {
       height: 100%;
       width: 160px;
       position: fixed;
       z-index: 1;
       top: 0;
       left: 0;
-      background-color: rgb(250, 174, 34);
+      /* background-color: rgb(250, 174, 34); */
       overflow-x: hidden;
       padding-top: 20px;
       margin-left: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
-    .sidenav a{
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 15px;
-        color: #000000;
-        display: block;
-        background-color: rgb(255, 149, 0);
-        transition: 0.5s linear;
-    
-    
-    }
-    .sidenav a:hover {
-    color: #ffffff;
-    background: rgb(255, 89, 0);
-    }
-    .sidenav2 {
+
+    #sdnv2 {
     height: 100%;
     width: 160px;
     position: fixed;
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: rgb(250, 174, 34);
+    /* background-color: rgb(250, 174, 34); */
     margin-right: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     overflow-y: hidden;   
@@ -69,24 +55,42 @@
       margin-left: 50px;
       font-style: italic;
     }
+    #links a{
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 15px;
+        color: #000000;
+        display: block;
+        /* background-color: rgb(255, 149, 0); */
+        transition: 0.5s linear;
+    
+    }
+    #links a:hover {
+    color: #ffffff;
+    /* background: rgb(255, 89, 0); */
+    }
 
   </style>
  </head>
  <body>
-    <div class="sidenav">
+    <div id="sdnv">
         <div class="space"><h1 align="center" ><font size="5">Содержание</font></h1></div>
-        <a href="/">Характеристика Головлёва</a>
-        <a href="/obraz">Образ Головлёва</a>
-        <a href="/prototypes">Прототип Иудушки</a>
-        <a href="/kino">Иудушка Головлёв в кино и театре</a>
-        <a href="/raskoln">Раскольников</a>
-        <a href="/game">Игра</a>
-        </a>
-    </div>
-    <div class="sidenav2"></div>
+        <div id="links">
+            <a href="/">Характеристика Головлёва</a>
+            <a href="/obraz">Образ Головлёва</a>
+            <a href="/prototypes">Прототип Иудушки</a>
+            <a href="/kino">Иудушка Головлёв в кино и театре</a>
+            <a href="/raskoln">Раскольников</a>
+            <a href="/game">Игра</a>
+            <a href="/caseman">Человек в футляре</a>
+            <a href="/gooseberry">Крыжовник</a>
+            <a href="/aboutlove">О любви</a>
+            </div>
+        </div>
+    <div id="sdnv2"></div>
 
     <header>
-      <div class="header" >
+      <div id="header" >
       <p align="center"><font size="9" face="century schoolbook" >Прототип</font></p>
       </div>
      </header> 
@@ -148,5 +152,68 @@
             Одна из последних записей в сохранившихся салтыковских «Месяцесловах»: «1862 года августа 8-го числа в 7-мь часов вечера в Спасском окончила жизнь жена Дмитрия Евг<рафовича> Салтыкова Аделаида Яковлевна и отвезена в Санкт-Петербург, и погребена на Католическом кладбище. Вывоз сделан в 16-е августа, а отпевание было католическим пастором, в доме села Спасского, 14-е число августа утром в 6-ть часов.- Мир праху твоему и блаженное царствие небесное ». Дмитрий Евграфович овдовел в 43 года.
         </p>
     </div>
+    <script type="text/javascript" >
+        function slowColorChange(item,color1,color2,t) {
+            let x1 = Number(color1.split(',')[0]);
+            let y1 = Number(color1.split(',')[1]);
+            let z1 = Number(color1.split(',')[2]);
+            let x2 = Number(color2.split(',')[0]);
+            let y2 = Number(color2.split(',')[1]);
+            let z2 = Number(color2.split(',')[2]);
+            let x,y,z;
+            let Vx = 4 * (x2-x1)/t;
+            let Vy = 4 * (y2-y1)/t;
+            let Vz = 4 * (z2-z1)/t;
+            let timer = setInterval(() => {
+              let resx,resy,resz
+              x = x1 + Vx;
+              x1 = x;
+              y = y1 + Vy;
+              y1 = y;
+              z = z1 + Vz;
+              z1 = z;
+              item.style.backgroundColor = `rgb(${x},${y},${z})`;
+            }, 4);
+              setTimeout(() => {clearInterval(timer)}, t)
+          }
+          let rask_mode = document.getElementById('sdnv');
+          let rask_mode1 = document.getElementById('sdnv2');
+          let rask_mode2 = document.getElementById('header');
+          let links = document.querySelectorAll('#links a');
+  
+          function getColor() {
+              return new Promise( (resolve,reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET','/color');
+                xhr.onload = () => {
+                  resolve(xhr.response);
+                }
+                xhr.send();
+              })
+              
+  
+          }
+          getColor().then( obj => {
+            let data = JSON.parse(obj);
+            if (data.diff) {
+               rask_mode.style.backgroundColor = `rgb(${data.sdnv[0]})`;
+               rask_mode1.style.backgroundColor = `rgb(${data.sdnv[0]})`;
+               rask_mode2.style.backgroundColor = `rgb(${data.header[0]})`;
+               links.forEach( el => {el.style.backgroundColor = `rgb(${data.links[0]})`} )
+               setTimeout( () => {slowColorChange(rask_mode,data.sdnv[0],data.sdnv[1],1000)}, 500);
+               setTimeout( () => {slowColorChange(rask_mode1,data.sdnv[0],data.sdnv[1],1000)}, 500);
+               setTimeout( () => {slowColorChange(rask_mode2,data.header[0],data.header[1],1000)}, 500 );
+               setTimeout( () => {links.forEach(el => {slowColorChange(el,data.links[0],data.links[1],1000)})}, 500 );
+            }else {
+               rask_mode.style.backgroundColor = `rgb(${data.sdnv})`;
+               rask_mode1.style.backgroundColor = `rgb(${data.sdnv})`;
+               rask_mode2.style.backgroundColor = `rgb(${data.header})`;
+               links.forEach( el => {el.style.backgroundColor = `rgb(${data.links})`} )
+            }
+          } )
+  
+          
+          
+      </script>
   
  </body>

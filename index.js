@@ -9,7 +9,7 @@ import bodyParser from 'body-parser';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-let h_adrs=[0,1];
+let h_adrs=[0,1,'/'];
 let an;
 let s = 0;
 
@@ -24,7 +24,21 @@ const server = http.createServer( (req, res) => {
         '/raskoln': path.join(__dirname, 'HTML', 'rasckolnikow.html'),
         '/fade.js': path.join(__dirname, 'HTML', 'index.html'),
         '/:' : path.join(__dirname, 'HTML', 'index.html'),
-        '/game':path.join(__dirname, 'HTML', 'thegame.html')
+        '/game':path.join(__dirname, 'HTML', 'thegame.html'),
+        '/caseman': path.join(__dirname, 'HTML', 'caseman.html'),
+    }
+    let colors = {
+        '/' : ['o','250,174,34','255,149,0','249, 203, 118'],
+        '/obraz' : ['o','250,174,34','255,149,0','249, 203, 118'],
+        '/prototypes' : ['o','250,174,34','255,149,0','249, 203, 118'],
+        '/kino' : ['o','250,174,34','255,149,0','249, 203, 118'],
+        '/raskoln' : ['g','30, 121, 2','21, 87, 1','40, 158, 4'],
+        '/game' : ['g','30, 121, 2','21, 87, 1','40, 158, 4'],
+        '/caseman' : ['b','60, 79, 250','54,69,207','91,107,250'],
+        '/gooseberry' : 'b',
+        '/aboutlove' : 'b'
+
+
     }
     let adrs_sch = {
         '/game':path.join(__dirname, 'HTML', 'thegame_sch.html'),
@@ -96,18 +110,10 @@ const server = http.createServer( (req, res) => {
         '/game_1?numb1=4l' : path.join(__dirname, 'HTML','end.html'),
 
 
+    }
 
-    }
-    let adrs_sch2 = {
-        '/' : path.join(__dirname, 'HTML', 'index_sch.html'),
-        '/prototypes' : path.join(__dirname, 'HTML', 'proto_sch.html'),
-        '/kino' : path.join(__dirname, 'HTML', 'kino_sch.html'),
-        '/obraz' : path.join(__dirname, 'HTML','obraz_sch.html'),
-        
-    }
     adrs_sch.__proto__ = adrs;
-    adrs_sch2.__proto__ = adrs;
-    if(req.url !== '/favicon.ico') h_adrs.push(req.url)
+    if ( (req.url !== '/favicon.ico') && (req.url !== '/color')) h_adrs.push(req.url)
     console.log(req.url)
     let right_answers = ['3p','1a','2b','1c','3d','1e','2f','4g','2h','1i','2j','3k','3l'];
 
@@ -216,26 +222,53 @@ const server = http.createServer( (req, res) => {
           <h1 align="center" >Вы прошли тест. Ваш результат: ${Math.trunc(s/14*100)}%
          </body>`)
     }
-    if( (( (h_adrs[h_adrs.length-2] === '/obraz') || (h_adrs[h_adrs.length-2] === '/') || (h_adrs[h_adrs.length-2] === '/prototypes')||(h_adrs[h_adrs.length-2] === '/kino') ) && (( h_adrs[h_adrs.length-1] === '/raskoln') || (h_adrs[h_adrs.length-1] === '/game') ) ) ) {
-
-        fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
-            if (err) {throw err};
-            res.writeHead(200, {"Content-type" : "text/html"});
-            res.end(data)
-        })
-    }else if (   ( (h_adrs[h_adrs.length-2] === '/raskoln') || (h_adrs[h_adrs.length-2] === '/game') ) && ( ( h_adrs[h_adrs.length-1] == '/prototypes' ) || ( h_adrs[h_adrs.length-1] == '/' ) || ( h_adrs[h_adrs.length-1] == '/kino' || ( h_adrs[h_adrs.length-1] == '/obraz' ) )))  {
-        fs.readFile(adrs_sch2[h_adrs[h_adrs.length-1]], (err, data) => {
-            if (err) {throw err};
-            res.writeHead(200, {"Content-type" : "text/html"});
-            res.end(data)
-        })
+    let colorDiff;
+    if ( colors[h_adrs[h_adrs.length-2]][0] == colors[h_adrs[h_adrs.length-1]][0]) {
+        colorDiff = {
+            diff : false,
+            header : colors[h_adrs[h_adrs.length-1]][3] ,
+            sdnv : colors[h_adrs[h_adrs.length-1]][1] ,
+            links : colors[h_adrs[h_adrs.length-1]][2] ,
+        }
     }else {
-        fs.readFile(adrs_sch[h_adrs[h_adrs.length-1]], (err, data) => {
+       colorDiff = {
+        header : [ colors[h_adrs[h_adrs.length-2]][3], colors[h_adrs[h_adrs.length-1]][3] ],
+        sdnv : [ colors[h_adrs[h_adrs.length-2]][1], colors[h_adrs[h_adrs.length-1]][1] ],
+        links : [ colors[h_adrs[h_adrs.length-2]][2], colors[h_adrs[h_adrs.length-1]][2] ],
+        diff : true
+       } 
+    }
+    
+    fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
             if (err) {throw err};
             res.writeHead(200, {"Content-type" : "text/html"});
             res.end(data)
         })
+    if (req.url === '/color') {
+        res.writeHead(200, {"Content-type" : "text"});
+        res.end(JSON.stringify(colorDiff))
     }
+
+    // if ( ( colors[h_adrs[h_adrs.length-2]] === 'o') && ( colors[h_adrs[h_adrs.length-1]] === 'g') ) {
+
+    //     fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
+    //         if (err) {throw err};
+    //         res.writeHead(200, {"Content-type" : "text/html"});
+    //         res.end(data)
+    //     })
+    // }else if ( ( colors[h_adrs[h_adrs.length-2]] === 'g') && ( colors[h_adrs[h_adrs.length-1]] === 'o') )  {
+    //     fs.readFile(adrs_sch2[h_adrs[h_adrs.length-1]], (err, data) => {
+    //         if (err) {throw err};
+    //         res.writeHead(200, {"Content-type" : "text/html"});
+    //         res.end(data)
+    //     })
+    // }else {
+    //     fs.readFile(adrs_sch[h_adrs[h_adrs.length-1]], (err, data) => {
+    //         if (err) {throw err};
+    //         res.writeHead(200, {"Content-type" : "text/html"});
+    //         res.end(data)
+    //     })
+    // }
 } )
 
 
