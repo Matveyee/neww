@@ -9,14 +9,13 @@ import bodyParser from 'body-parser';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-let h_adrs=[0,1,'/'];
+let h_adrs=[0,'/','/'];
 let an;
 let s = 0;
 
 const server = http.createServer( (req, res) => {
     
     let adrs = {
-        '/favicon.ico' : path.join(__dirname, 'HTML', 'index.html'),
         '/' : path.join(__dirname, 'HTML', 'index.html'),
         '/obraz' : path.join(__dirname, 'HTML','obraz.html'),
         '/prototypes' : path.join(__dirname, 'HTML', 'proto.html'),
@@ -26,15 +25,19 @@ const server = http.createServer( (req, res) => {
         '/:' : path.join(__dirname, 'HTML', 'index.html'),
         '/game':path.join(__dirname, 'HTML', 'thegame.html'),
         '/caseman': path.join(__dirname, 'HTML', 'caseman.html'),
+        
+    }
+    let others = {
+        '/main.css' : path.join(__dirname, 'HTML', 'main.css'),
     }
     let colors = {
-        '/' : ['o','250,174,34','255,149,0','249, 203, 118'],
-        '/obraz' : ['o','250,174,34','255,149,0','249, 203, 118'],
-        '/prototypes' : ['o','250,174,34','255,149,0','249, 203, 118'],
-        '/kino' : ['o','250,174,34','255,149,0','249, 203, 118'],
-        '/raskoln' : ['g','30, 121, 2','21, 87, 1','40, 158, 4'],
-        '/game' : ['g','30, 121, 2','21, 87, 1','40, 158, 4'],
-        '/caseman' : ['b','60, 79, 250','54,69,207','91,107,250'],
+        '/' : ['o','250,174,34','255,149,0','249, 203, 118','255,255,255,'],
+        '/obraz' : ['o','250,174,34','255,149,0','249, 203, 118','255,255,255,'],
+        '/prototypes' : ['o','250,174,34','255,149,0','249, 203, 118','255,255,255,'],
+        '/kino' : ['o','250,174,34','255,149,0','249, 203, 118','255,255,255,'],
+        '/raskoln' : ['g','30, 121, 2','21, 87, 1','40, 158, 4','255,255,255,'],
+        '/game' : ['g','30, 121, 2','21, 87, 1','40, 158, 4','255,255,255,'],
+        '/caseman' : ['b','60, 79, 250','54,69,207','91,107,250','255,255,255,'],
         '/gooseberry' : 'b',
         '/aboutlove' : 'b'
 
@@ -108,16 +111,15 @@ const server = http.createServer( (req, res) => {
         '/game_1?numb1=2l' : path.join(__dirname, 'HTML','end.html'),
         '/game_1?numb1=3l' : path.join(__dirname, 'HTML','end.html'),
         '/game_1?numb1=4l' : path.join(__dirname, 'HTML','end.html'),
-
-
     }
 
     adrs_sch.__proto__ = adrs;
-    if ( (req.url !== '/favicon.ico') && (req.url !== '/color')) h_adrs.push(req.url)
+
+    if ( (req.url !== '/favicon.ico') && (req.url !== '/color') && (req.url !== '/main.css')) h_adrs.push(req.url)
     console.log(req.url)
     let right_answers = ['3p','1a','2b','1c','3d','1e','2f','4g','2h','1i','2j','3k','3l'];
 
-    if ((h_adrs[h_adrs.length-1][7] == '?') && (req.url != '/favicon.ico')) {
+    if ((h_adrs[h_adrs.length-1][7] == '?') && (req.url != '/favicon.ico') && (req.url !== '/main.css') ) {
         an = h_adrs[h_adrs.length-1][14]+h_adrs[h_adrs.length-1][15];
         right_answers.includes(an) ? s++ : s = s;
         console.log(s)
@@ -223,6 +225,7 @@ const server = http.createServer( (req, res) => {
          </body>`)
     }
     let colorDiff;
+    
     if ( colors[h_adrs[h_adrs.length-2]][0] == colors[h_adrs[h_adrs.length-1]][0]) {
         colorDiff = {
             diff : false,
@@ -238,12 +241,28 @@ const server = http.createServer( (req, res) => {
         diff : true
        } 
     }
-    
-    fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
+    if (req.url == '/main.css') {
+        fs.readFile(others['/main.css'], (err, data) => {
             if (err) {throw err};
+            data = String(data);
+            data = data.replace('/* {header} */', 'background-color: rgb(' + colors[h_adrs[h_adrs.length-2]][3] + ');');
+            data = data.replace('/* {sdnv} */', 'background-color: rgb(' + colors[h_adrs[h_adrs.length-2]][1] + ');');
+            data = data.replace('/* {links} */', 'background-color: rgb(' + colors[h_adrs[h_adrs.length-2]][2] + ');');
+            data = data.replace('/* {linkshover} */', 'background-color: rgb(' + colors[h_adrs[h_adrs.length-2]][2] + ');');
+            res.writeHead(200, {"Content-type" : 'text/css'});
+            res.end(data)
+        })
+    }
+    if(Object.keys(adrs).includes(req.url)) {
+        fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
+            if (err) {throw err};
+            console.log('a')
             res.writeHead(200, {"Content-type" : "text/html"});
             res.end(data)
         })
+    }
+
+    
     if (req.url === '/color') {
         res.writeHead(200, {"Content-type" : "text"});
         res.end(JSON.stringify(colorDiff))
