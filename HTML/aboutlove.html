@@ -54,10 +54,71 @@
      </header> 
     <div class="textblock">
         <h1 align="center" >Анализ произведения "О любви"</h1>
-        
-    </div>
+        <div onclick='p1()' class="triangle-right" href="/+1paragraph"></div>
+        <h2 class="paragraph1" >Тема</h2>
+        <p class="paragraph1" >Основная тема чеховского рассказа – это, конечно же, любовь, то на недоступная любовь, которая не приносит человеку никакого счастья и удовлетворения, её исходом являются только страдания. Запреты, установленные обществом и моралью, не дают героям в полной мере насладиться возникшим взаимным чувством. Нельзя тайно встречаться с замужней женщиной, нельзя лгать и предавать своего законного мужа, от которого у тебя двое детей. Именно это не позволяло Алёхину и Анне Алексеевне любить друг друга и быть счастливыми.</p>
+        <p class="paragraph1"> Тема счастья тоже нашла отражение в рассказе. Даже если бы они признались и сделали шаг навстречу друг другу, их репутация была бы испорчена. Счастье наряду с общественным осуждением и укорами совести было, казалось бы, невозможно. Поэтому они предпочли не допускать этого и смириться с болью, которая появилась из-за любви.</p>
+        <p class="paragraph1"> Тема раскаяния также важна для понимания произведения. После прощания с любимой Алёхин осознаёт, что он должен был дать волю чувствам, которые были в его сердце на протяжении многих лет. Он понимает, что не стоило жертвовать любовью ради спокойной жизни и долга.</p>
+        <div onclick='p2()'class="triangle-righters" href="/+1paragraph" id="secbut"></div>
+        <h2 class="paragraph2" >Жанр</h2>
+        <p class="paragraph2" >Заявлено, что это рассказ, и это абсолютно так. Об этом говорит, во-первых, краткость произведения. Во-вторых, в рассказе присутствует одна сюжетная линия, в данном случае это развитие взаимоотношений между главными героями, которых, кстати, в рассказе мало, в «О любви» их двое.</p>
+        <p class="paragraph2" >Выбранный автором жанр для описания этой истории как нельзя кстати подходит, потому что в этом лаконичный рассказ-миниатюру он смог уместить глубокую философскую мысль и раскрыть реалистический метод, то есть правдивое изображение действительности.</p>
+        <div onclick='p3()'class="triangle-righters" href="/+1paragraph" id="thbut"></div>
+        <h2 class="paragraph3" >Главная мысль</h2>
+        <p class="paragraph3" >Название рассказа говорит само за себя, это рассказ о таком прекрасном, но в то же время необъяснимом чувстве, как любовь. Алёхин со своими приятелями рассуждает о том, что у русских есть глупая привычка – они не могут просто любить, им нужно усложнять себе жизнь, постоянно задавая множество вопросов – хорошо это или плохо, честно или нечестно.</p>
+        <p class="paragraph3" >Мне кажется, суть рассказа в борьбе чувств и разума. С одной стороны, мы видим красивую горничную Пелагею, которая влюблена в неотёсанного пьяницу Никанора, она периодически получает от него унижения и побои, но всё же любит. В этом случае побеждают чувства и желание любить человека, несмотря ни на что. А с другой стороны -любовь главных героев. Здесь побеждает разум, потому что оба понимают, что их отношения невозможны из-за моральных устоев. Оба героя постепенно начинают страдать из-за этой желанной, но запретной любви. Анна Алексеевна уже не похожа на себя, из жизнерадостной красивой девушки она превращается в вечно недовольную, язвительную женщину, она начинает срываться на Алёхина, возможно, обвиняя его в том, что он появился в её жизни, и она вынуждена испытывать то, что она испытывает. Но она не может уйти от мужа, это будет предательством. Побеждает разум, она уезжает в Крым, рыдая на груди у её возлюбленного, и дарит на прощание первый и последний поцелуй.</p>
+       </div>
     <script type="text/javascript" >
-      function slowColorChange(item,color1,color2,t) {
+      function p1() {
+            let parghp1 = document.querySelectorAll('.paragraph1');
+            let secondButton = document.getElementById('secbut');
+            if ( p1.counter === undefined ) {
+                p1.counter = 1;
+            }else {
+                p1.counter++;
+            }
+            if (p1.counter % 2 == 0) {
+                parghp1.forEach( el => {el.style.color = 'white'} );
+                secondButton.style.borderLeft = '40px solid white';
+            }else{
+                parghp1.forEach( el => {el.style.color = 'black'} );
+                secondButton.style.borderLeft = '40px solid rgb(91, 107, 250)';
+            }
+        }
+        function p2() {
+            let parghp2 = document.querySelectorAll('.paragraph2');
+            let thirdButton = document.getElementById('thbut');
+            if ( p2.counter === undefined ) {
+                p2.counter = 1;
+            }else {
+                p2.counter++;
+            }
+            if (p2.counter % 2 == 0) {
+                parghp2.forEach( el => {el.style.color = 'white'} );
+                thirdButton.style.borderLeft = '40px solid white';
+            }else{
+                parghp2.forEach( el => {el.style.color = 'black'} );
+                thirdButton.style.borderLeft = '40px solid rgb(91, 107, 250)';
+            }
+
+        }
+        function p3() {
+            let parghp3 = document.querySelectorAll('.paragraph3');
+            let fourthButton = document.getElementById('trthbut');
+            if ( p3.counter === undefined ) {
+                p3.counter = 1;
+            }else {
+                p3.counter++;
+            }
+            if (p3.counter % 2 == 0) {
+                parghp3.forEach( el => {el.style.color = 'white'} );
+                fourthButton.style.borderLeft = '40px solid white';
+            }else{
+                parghp3.forEach( el => {el.style.color = 'black'} );
+                fourthButton.style.borderLeft = '40px solid rgb(91, 107, 250)';
+            }
+        }
+      function slowColorChange(item,color1,color2,t,ex=0) {
           let x1 = Number(color1.split(',')[0]);
           let y1 = Number(color1.split(',')[1]);
           let z1 = Number(color1.split(',')[2]);
@@ -76,7 +137,11 @@
             y1 = y;
             z = z1 + Vz;
             z1 = z;
-            item.style.backgroundColor = `rgb(${x},${y},${z})`;
+            if (ex !== 0) {
+                item.style.borderLeft = `40px solid rgb(${x},${y},${z})`;
+              }else {
+                item.style.backgroundColor = `rgb(${x},${y},${z})`;
+              }
           }, 4);
             setTimeout(() => {clearInterval(timer)}, t)
         }
@@ -84,6 +149,7 @@
         let rask_mode1 = document.getElementById('sdnv2');
         let rask_mode2 = document.getElementById('header');
         let links = document.querySelectorAll('#links a');
+        let button = document.querySelector('.triangle-right');
 
         function getColor() {
             return new Promise( (resolve,reject) => {
@@ -110,6 +176,7 @@
              setTimeout( () => {slowColorChange(rask_mode1,data.sdnv[0],data.sdnv[1],1000)}, 500);
              setTimeout( () => {slowColorChange(rask_mode2,data.header[0],data.header[1],1000)}, 500 );
              setTimeout( () => {links.forEach(el => {slowColorChange(el,data.links[0],data.links[1],1000)})}, 500 );
+             setTimeout( () => {slowColorChange(button,data.header[0],data.header[1],1000,1)}, 500 );
           }else {
              links.forEach( el => {el.style.backgroundColor = `rgb(${data.links})`} )
              rask_mode.style.backgroundColor = `rgb(${data.sdnv})`;

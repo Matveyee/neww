@@ -3,11 +3,36 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { compileFunction } from 'vm';
-import bodyParser from 'body-parser';
+import { MongoClient } from 'mongodb';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const client = new MongoClient('mongodb+srv://matveykarlovw:screemer228@cluster0.sfz0dsq.mongodb.net/');
+
+//connecting database
+try{
+    client.connect();
+    console.log('База данных поключена');
+}catch (e) {
+    console.log(e);
+}
+const partans = client.db().collection('Participants');
+partans.insertOne( { name : 'Mat', score : 3 } )
+partans.insertOne( { name : 'Carl', score : 4 } )
+partans.insertOne( { name : 'Vlad', score : 10 } )
+partans.insertOne( { name : 'Max', score : 2 } )
+
+
+async function getPartans(){
+    let arr = await partans.find().toArray();
+    return JSON.stringify(arr)
+}
+
+
+
+
+
 
 let h_adrs=[0,'/','/'];
 let an;
@@ -120,7 +145,7 @@ const server = http.createServer( (req, res) => {
 
     adrs_sch.__proto__ = adrs;
 
-    if ( (req.url !== '/favicon.ico') && (req.url !== '/color') && (req.url !== '/main.css')) h_adrs.push(req.url)
+    if ( (req.url !== '/favicon.ico') && (req.url !== '/color') && (req.url !== '/main.css') && (req.url !== '/getParts')) h_adrs.push(req.url)
     console.log(req.url)
     let right_answers = ['3p','1a','2b','1c','3d','1e','2f','4g','2h','1i','2j','3k','3l'];
 
@@ -271,6 +296,12 @@ const server = http.createServer( (req, res) => {
     if (req.url === '/color') {
         res.writeHead(200, {"Content-type" : "text"});
         res.end(JSON.stringify(colorDiff))
+    }
+    if (req.url === '/getParts') {
+        getPartans().then( arr => {
+            res.writeHead(200, {"Content-type" : "text"});
+            res.end(arr);
+        } )
     }
 
     // if ( ( colors[h_adrs[h_adrs.length-2]] === 'o') && ( colors[h_adrs[h_adrs.length-1]] === 'g') ) {

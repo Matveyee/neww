@@ -22,6 +22,20 @@
     .p:hover {
         color : purple
     }
+    .rectangle{
+      height: 25px;
+      width: 100%;
+      background-color: rgb(16, 69, 212);
+    }
+    .checkButton {
+      background-color: rgb(5, 173, 5);
+      color : white;
+      text-align: center;
+    }
+    .name {
+      color: white;
+    }
+
 
 
 
@@ -54,10 +68,19 @@
      </header> 
     <div class="textblock">
         <h1 align="center" >Статистика по тесту</h1>
+        <div id="getInfoButton" onclick="helpOne()" class="triangle-right"></div>
+
+          <table  width="100%" id="statistics" cellspacing="6">
+          
+        </table>
+
         
     </div>
     <script type="text/javascript" >
-      function slowColorChange(item,color1,color2,t) {
+      function toBlack(id) {
+        document.getElementById(id).style.color = 'black';
+      }
+      function slowColorChange(item,color1,color2,t,ex = 0) {
           let x1 = Number(color1.split(',')[0]);
           let y1 = Number(color1.split(',')[1]);
           let z1 = Number(color1.split(',')[2]);
@@ -76,7 +99,11 @@
             y1 = y;
             z = z1 + Vz;
             z1 = z;
-            item.style.backgroundColor = `rgb(${x},${y},${z})`;
+            if (ex !== 0) {
+                item.style.borderLeft = `40px solid rgb(${x},${y},${z})`;
+              }else {
+                item.style.backgroundColor = `rgb(${x},${y},${z})`;
+              }
           }, 4);
             setTimeout(() => {clearInterval(timer)}, t)
         }
@@ -84,20 +111,52 @@
         let rask_mode1 = document.getElementById('sdnv2');
         let rask_mode2 = document.getElementById('header');
         let links = document.querySelectorAll('#links a');
+        let button = document.querySelector('.triangle-right');
 
         function getColor() {
             return new Promise( (resolve,reject) => {
               const xhr = new XMLHttpRequest();
               xhr.open('GET','/color');
-              
               xhr.onload = () => {
                 console.log(xhr.response)
                 resolve(xhr.response);
               }
               xhr.send();
             })
-            
+        }
+        function getPartans() {
+            return new Promise( (resolve,reject) => {
+              const xhr = new XMLHttpRequest();
+              xhr.open('GET','/getParts');
+              
+              xhr.onload = () => {
 
+                resolve(xhr.response);
+              }
+              xhr.send();
+            })
+        }
+        function helpOne() {
+          getPartans().then( (objJson) => {
+            let data = JSON.parse(objJson)
+            // let max = data.length;
+            let table = document.getElementById('statistics')
+            i = 0;
+
+            for(let el of data) {
+              i++;
+              table.insertAdjacentHTML("beforeend",`<tr height="30px" >
+            <td class="number" width="5%" style="text-align: center;"> ${i} </td><td class="strip" width="60%"><div class="rectangle" style='width : ${Math.trunc(el.score * 100/20)}%'></div></td><td class="name" id='n${i}'>${el.name}</td><td class="checkButton" width="10%" onclick='toBlack("n${i}")' >Check</td>
+            </tr>`)
+            }
+            // for(let el of data) {
+            //   console.log(el.name + ' ' + el.score);
+            // }
+            // for(let el of data) {
+            //   console.log(el.part)
+            // }
+
+          } )
         }
         getColor().then( obj => {
           let data = JSON.parse(obj);
@@ -110,6 +169,7 @@
              setTimeout( () => {slowColorChange(rask_mode1,data.sdnv[0],data.sdnv[1],1000)}, 500);
              setTimeout( () => {slowColorChange(rask_mode2,data.header[0],data.header[1],1000)}, 500 );
              setTimeout( () => {links.forEach(el => {slowColorChange(el,data.links[0],data.links[1],1000)})}, 500 );
+             setTimeout( () => {slowColorChange(button,data.header[0],data.header[1],1000,1)}, 500 );
           }else {
              links.forEach( el => {el.style.backgroundColor = `rgb(${data.links})`} )
              rask_mode.style.backgroundColor = `rgb(${data.sdnv})`;
@@ -117,7 +177,8 @@
              rask_mode2.style.backgroundColor = `rgb(${data.header})`;
              
           }
-        } )
+        } );
+
 
         
         

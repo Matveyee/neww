@@ -53,10 +53,72 @@
      </header> 
     <div class="textblock">
         <h1 align="center" >Анализ произведения "Крыжовник"</h1>
-        
+        <div onclick='p1()' class="triangle-right" href="/+1paragraph"></div>
+        <h2 class="paragraph1" >Тема</h2>
+        <p  class="paragraph1" >Название рассказа носит в себе скрытую иронию, автор тонко замаскировал глупость и ограниченность героя повествования. Его мечты об имении с кустами крыжовника – то, на что потрачена вся жизнь, цель, которая не стоит того, чтобы к ней стремиться.</p>
+        <p  class="paragraph1">Одинокий человек, без семьи, детей, без тепла и душевного понимания друзей и родных (их у него практически не было из-за тех условий, в которые он сам заключил себя в погоне за “крыжовником”) получает то, о чём мечтал. Его душа очерствела, он не умеет любить и заботиться о ближнем, он глух и слеп к настоящей жизни.</p>
+        <p  class="paragraph1">Идея произведения заключена в чудеснейшей фразе Ивана Ивановича о “человеке с молоточком”. Если бы такой человек приходил и стучал каждый раз, когда мы забываем о том, что рядом есть люди, которые очень нуждаются в помощи, то на земле могло бы быть гораздо больше счастливых людей. Крайне важные мысли вкладывает автор в уста рассказчика: люди, обретя то, за чем гонятся, чувствуют себя счастливыми и отворачиваются от других, но жизнь рано или поздно покажет свои когти. И тогда “за кулисами” оказываешься ты сам, и все будут так же глухи к твоему горю, как и ты когда-то. Эта закономерность свойственна человеческой натуре, поэтому автор призывает делать добро, пока есть силы и возможность, а не почивать в своём “счастливом мирке”.</p>
+        <p  class="paragraph1" >Слушатели, Буркин и Алёхин, расслабленные после купания и вкусного ужина, не понимают того, о чём пытался рассказать им товарищ. В тепле и достатке мысли о человеческих судьбах, нищете и бедности не трогают, не волнуют, не кажутся животрепещущими. Алёхину хочется рассказов о дамах, красивой жизни, захватывающих сюжетах, Буркин тоже далёк от философии друга. Проблематика рассказа в том, что жизнь человека пуста и бессмысленна, если он думает только о себе; делать добро другим – вот то, что является мерой счастья. Анализируя собственную жизнь и сбывшуюся мечту своего брата, Иван Иванович приходит к выводу, что нельзя быть счастливым, когда вокруг столько бед и несчастий. Как бороться с таким укладом, он не знает и не считает себя способным на эту борьбу.</p>
+        <div onclick='p2()'class="triangle-righters" href="/+1paragraph" id="secbut"></div>
+        <h2 class="paragraph2" >Жанр</h2>
+        <p class="paragraph2" >Самый излюбленный литературный жанр А. П. Чехова – это рассказ. Малая эпическая форма с одной сюжетной линией и минимальным количеством персонажей помогает автору создавать лаконичные, злободневные и очень правдивые произведения. Написанный в духе реализма “Крыжовник” стал маленькой историей, которая учит большим истинам. Именно эта особенность свойственна всем рассказам Чехова – смысловая масштабность в ограниченном объёме.</p>
+        <div onclick='p3()'class="triangle-righters" href="/+1paragraph" id="thbut"></div>
+        <h2 class="paragraph3" >Главная мысль</h2>
+        <p class="paragraph3" >Иван Иваныч Чимша-Гималайский вместе со своим попутчиком Буркиным из-за разыгравшегося ливня навещает своего друга – помещика Павла Алёхина. Во время дружеского чаепития Иван Иваныч рассказывает историю жизни своего брата – Николая Иваныча.</p>
+        <p class="paragraph3" >Всё своё детство братья провели в поместье своего отца, однако после его смерти оно было отсужено за долги. Для Николая это стало страшным ударом, поместье начало ассоциироваться у него со счастливым детством, и всю свою жизнь он потратил на то, чтобы приобрести своё собственное имение и вернуть утраченное счастье.</p>
+        <p class="paragraph3">Николай Иваныч долго и упорно работал, копил деньги, экономил на всём и жил впроголодь. Из-за такого тяжёлого образа жизни умерла его жена – некрасивая, но богатая вдова, на которой он женился только из-за её денег. Однако в итоге Никола</p>
     </div>
     <script type="text/javascript" >
-      function slowColorChange(item,color1,color2,t) {
+      function p1() {
+            let parghp1 = document.querySelectorAll('.paragraph1');
+            let secondButton = document.getElementById('secbut');
+            if ( p1.counter === undefined ) {
+                p1.counter = 1;
+            }else {
+                p1.counter++;
+            }
+            if (p1.counter % 2 == 0) {
+                parghp1.forEach( el => {el.style.color = 'white'} );
+                secondButton.style.borderLeft = '40px solid white';
+            }else{
+                parghp1.forEach( el => {el.style.color = 'black'} );
+                secondButton.style.borderLeft = '40px solid rgb(91, 107, 250)';
+            }
+        }
+        function p2() {
+            let parghp2 = document.querySelectorAll('.paragraph2');
+            let thirdButton = document.getElementById('thbut');
+            if ( p2.counter === undefined ) {
+                p2.counter = 1;
+            }else {
+                p2.counter++;
+            }
+            if (p2.counter % 2 == 0) {
+                parghp2.forEach( el => {el.style.color = 'white'} );
+                thirdButton.style.borderLeft = '40px solid white';
+            }else{
+                parghp2.forEach( el => {el.style.color = 'black'} );
+                thirdButton.style.borderLeft = '40px solid rgb(91, 107, 250)';
+            }
+
+        }
+        function p3() {
+            let parghp3 = document.querySelectorAll('.paragraph3');
+            let fourthButton = document.getElementById('trthbut');
+            if ( p3.counter === undefined ) {
+                p3.counter = 1;
+            }else {
+                p3.counter++;
+            }
+            if (p3.counter % 2 == 0) {
+                parghp3.forEach( el => {el.style.color = 'white'} );
+                fourthButton.style.borderLeft = '40px solid white';
+            }else{
+                parghp3.forEach( el => {el.style.color = 'black'} );
+                fourthButton.style.borderLeft = '40px solid rgb(91, 107, 250)';
+            }
+        }
+      function slowColorChange(item,color1,color2,t,ex = 0) {
           let x1 = Number(color1.split(',')[0]);
           let y1 = Number(color1.split(',')[1]);
           let z1 = Number(color1.split(',')[2]);
@@ -75,7 +137,11 @@
             y1 = y;
             z = z1 + Vz;
             z1 = z;
-            item.style.backgroundColor = `rgb(${x},${y},${z})`;
+            if (ex !== 0) {
+                item.style.borderLeft = `40px solid rgb(${x},${y},${z})`;
+              }else {
+                item.style.backgroundColor = `rgb(${x},${y},${z})`;
+              }
           }, 4);
             setTimeout(() => {clearInterval(timer)}, t)
         }
@@ -83,6 +149,7 @@
         let rask_mode1 = document.getElementById('sdnv2');
         let rask_mode2 = document.getElementById('header');
         let links = document.querySelectorAll('#links a');
+        let button = document.querySelector('.triangle-right');
 
         function getColor() {
             return new Promise( (resolve,reject) => {
@@ -109,6 +176,7 @@
              setTimeout( () => {slowColorChange(rask_mode1,data.sdnv[0],data.sdnv[1],1000)}, 500);
              setTimeout( () => {slowColorChange(rask_mode2,data.header[0],data.header[1],1000)}, 500 );
              setTimeout( () => {links.forEach(el => {slowColorChange(el,data.links[0],data.links[1],1000)})}, 500 );
+             setTimeout( () => {slowColorChange(button,data.header[0],data.header[1],1000,1)}, 500 );
           }else {
              links.forEach( el => {el.style.backgroundColor = `rgb(${data.links})`} )
              rask_mode.style.backgroundColor = `rgb(${data.sdnv})`;
