@@ -18,10 +18,7 @@ try{
     console.log(e);
 }
 const partans = client.db().collection('Participants');
-partans.insertOne( { name : 'Mat', score : 3 } )
-partans.insertOne( { name : 'Carl', score : 4 } )
-partans.insertOne( { name : 'Vlad', score : 10 } )
-partans.insertOne( { name : 'Max', score : 2 } )
+
 
 
 async function getPartans(){
