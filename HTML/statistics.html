@@ -146,7 +146,7 @@
             for(let el of data) {
               i++;
               table.insertAdjacentHTML("beforeend",`<tr height="30px" >
-            <td class="number" width="5%" style="text-align: center;"> ${i} </td><td class="strip" width="60%"><div class="rectangle" style='width : ${Math.trunc(el.score * 100/6)}%'></div></td><td class="name" id='n${i}'>${el.name}</td><td class="checkButton" width="10%" onclick='toBlack("n${i}")' >Check</td>
+            <td class="number" width="5%" style="text-align: center;"> ${i} </td><td class="strip" width="60%"><div class="rectangle" style='width : ${Math.trunc(el.score * 100/7)}%'></div></td><td class="name" id='n${i}'>${el.name}</td><td class="checkButton" width="10%" onclick='toBlack("n${i}")' >Check</td>
             </tr>`)
             }
             // for(let el of data) {
