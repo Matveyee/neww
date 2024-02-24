@@ -4,6 +4,7 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { MongoClient } from 'mongodb';
+import * as readline from 'node:readline';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -18,6 +19,7 @@ try{
     console.log(e);
 }
 const partans = client.db().collection('Participants');
+partans.insertOne({ name : "Math", score : 5})
 
 
 
@@ -301,27 +303,26 @@ const server = http.createServer( (req, res) => {
         } )
     }
 
-    // if ( ( colors[h_adrs[h_adrs.length-2]] === 'o') && ( colors[h_adrs[h_adrs.length-1]] === 'g') ) {
+    if ( ( colors[h_adrs[h_adrs.length-2]] === 'o') && ( colors[h_adrs[h_adrs.length-1]] === 'g') ) {
 
-    //     fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
-    //         if (err) {throw err};
-    //         res.writeHead(200, {"Content-type" : "text/html"});
-    //         res.end(data)
-    //     })
-    // }else if ( ( colors[h_adrs[h_adrs.length-2]] === 'g') && ( colors[h_adrs[h_adrs.length-1]] === 'o') )  {
-    //     fs.readFile(adrs_sch2[h_adrs[h_adrs.length-1]], (err, data) => {
-    //         if (err) {throw err};
-    //         res.writeHead(200, {"Content-type" : "text/html"});
-    //         res.end(data)
-    //     })
-    // }else {
-    //     fs.readFile(adrs_sch[h_adrs[h_adrs.length-1]], (err, data) => {
-    //         if (err) {throw err};
-    //         res.writeHead(200, {"Content-type" : "text/html"});
-    //         res.end(data)
-    //     })
-    // }
+        fs.readFile(adrs[h_adrs[h_adrs.length-1]], (err, data) => {
+            if (err) {throw err};
+            res.writeHead(200, {"Content-type" : "text/html"});
+            res.end(data)
+        })
+    }else if ( ( colors[h_adrs[h_adrs.length-2]] === 'g') && ( colors[h_adrs[h_adrs.length-1]] === 'o') )  {
+        fs.readFile(adrs_sch2[h_adrs[h_adrs.length-1]], (err, data) => {
+            if (err) {throw err};
+            res.writeHead(200, {"Content-type" : "text/html"});
+            res.end(data)
+        })
+    }else {
+        fs.readFile(adrs_sch[h_adrs[h_adrs.length-1]], (err, data) => {
+            if (err) {throw err};
+            res.writeHead(200, {"Content-type" : "text/html"});
+            res.end(data)
+        })
+    }
 } )
-
 
 server.listen( 3000, () => { console.log('Server is working...') });
